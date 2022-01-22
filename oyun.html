@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="js1Oyun.css">
+    <title>Document</title>
+    <script
+			  src="https://code.jquery.com/jquery-3.6.0.js"
+			  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			  crossorigin="anonymous"></script>
+    
+</head>
+<body style="background-color: darkturquoise;">
+    <audio id="myAudio">
+        <source src="bip.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="myAudio2">
+        <source src="wow.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="myAudio3">
+        <source src="ohno.mp3" type="audio/mpeg">
+    </audio>
+    <div style="display: inline-block;">
+    <main>
+        <!-- TODO:
+            sayılar random gelsin
+            müzik
+        -->
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        <section><p  class="hideP"></p></section>
+        
+        <a href="oyun.html"><button  style=" margin-left:0; padding: 86px; background-color: red;" ><h5 style="font-size: large; color: wheat;">NEW GAME</h5></button></a>
+
+        <form id="name" style=" padding: 110px; width: 400px; height: 60px; background-color: blue; font-size: 50px;"></form>
+
+        <form id="label" style="font-style: bold; font-size: 60px; margin-top: 0px; margin-bottom: 0px; margin-left:370px; padding: 110px; width: 145px; height: 60px; background-color: sandybrown;"></form>
+        
+    </main>
+<script >
+     let deger=prompt("Username:","");
+        document.getElementById("name").innerHTML ="Username:"+ deger;
+    var ses=document.getElementById("myAudio");
+    var ses2=document.getElementById("myAudio2");
+    var ses3=document.getElementById("myAudio3");
+    $(document).ready(function(){
+        
+         let say=0;
+
+         let sayilar = [5, 9, 1, 6, 10, 7, 4, 2, 2, 1, 4, 6, 7, 3, 8, 8, 3, 5, 9, 10];
+        shuffle(sayilar);
+        var elemanlar = $("p");
+
+        for (let i = 0; i < sayilar.length; i++) {
+            elemanlar[i].innerHTML = String(sayilar[i]);
+        }
+
+        function shuffle(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+
+
+        
+        
+        //Random diğer yöntem
+
+         /*
+                let sayilar = new Array();
+                let sayilar2 = new Array();
+
+            for (let i = 0; i < 5; i++) {  
+                 let randomnumber = Math.floor(Math.random() * 5)+1; 
+      
+                if (sayilar.indexOf(randomnumber)===-1) { 
+       
+                    sayilar.push(randomnumber);// diziye ekliyorum
+                    document.getElementsByTagName("p")[i].innerHTML=randomnumber;
+                }
+                else { 
+                i--;
+                }
+            }
+            for(let i=0;i<5;i++){
+                var randomnumber2 = Math.floor(Math.random() * 5)+1; 
+                if(sayilar2.indexOf(randomnumber2)===-1){
+                    sayilar2.push(randomnumber2);
+                    document.getElementsByTagName("p")[i+5].innerHTML=randomnumber2;
+                }
+                else{
+                i--;
+                }
+            }
+*/
+       
+        
+    
+        let tiklamaSayisi=0;
+        let s1=Number();
+        let s2=Number();
+        let s1element=null;
+        let s2element=null;
+        let sayac=500;
+        document.getElementById("label").innerHTML="Puan:"+sayac;
+        $("section").click(function(){
+            ses.play();
+            tiklamaSayisi++;
+            if(tiklamaSayisi==1){
+                
+                $(this).children("p").show();
+                s1=$(this).children("p").text();
+                s1element=$(this);
+
+            }
+            else if(tiklamaSayisi==2){
+                
+                tiklamaSayisi=0;
+                $(this).children("p").show();
+                s2=$(this).children("p").text();
+                s2element=$(this);
+                if(s1==s2){
+                    say++;
+                    ses2.play();
+                    s1element.children("p").removeClass("hideP");
+                    s1element.children("p").addClass("showP");
+                    s2element.children("p").removeClass("hideP");
+                    s2element.children("p").addClass("showP");
+                    $(s2element).css("background-color","yellow");
+                    $(s1element).css("background-color","yellow");
+                    $(s1element).addClass("disabledbutton");
+                    $(s2element).addClass("disabledbutton");
+                    $(s1element).attr("disabled", "disabled").off('click');
+                    $(s2element).attr("disabled", "disabled").off('click');
+                    tiklamaSayisi=0;
+                    
+                    
+                }
+                if(say==10){
+                    alert("Tebrikler "+deger+" oyunu kazandın :)");
+                    location.reload();
+                }
+                else if(s1!=s2){
+                    ses3.play();
+                    $(s1element).css("background-color","red");
+                    $(s2element).css("background-color","red");
+                setTimeout(function(){
+                    var elementler =$('p.hideP').hide();
+                    $(s1element).css("background-color","lightblue");
+                    $(s2element).css("background-color","lightblue");
+                },700);
+                
+                
+                sayac -=20;
+                }
+                document.getElementById("label").innerHTML="Puan:"+sayac;
+                if(sayac==0){
+                    alert("KAYBETTİN :(");
+                    location.reload();
+                }
+
+            }
+        })
+        
+});
+</script>
+</body>
+</html>
